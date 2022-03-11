@@ -18,7 +18,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 // api
 // POST
-app.post('/api/food', async (req, res) => {
+app.post('/v1/api/food', async (req, res) => {
     try {
         const newFood = new FoodModel(req.body);
         const newFoodNew = await newFood.save();
@@ -29,7 +29,7 @@ app.post('/api/food', async (req, res) => {
     }
 });
 
-app.get('/api/foods', async (req, res) => {
+app.get('/v1/api/foods', async (req, res) => {
     try {
         const foodList = await FoodModel.find();
         return res.status(200).json(foodList);
@@ -39,7 +39,7 @@ app.get('/api/foods', async (req, res) => {
     }
 });
 
-app.get('/api/food/:id', async (req, res) => {
+app.get('/v1/api/food/:id', async (req, res) => {
     try {
         const foodObj = await FoodModel.findById(req.params.id);
         return res.status(200).json(foodObj);
@@ -49,7 +49,7 @@ app.get('/api/food/:id', async (req, res) => {
     }
 });
 
-app.put('/api/food/:id', async (req, res) => {
+app.put('/v1/api/food/:id', async (req, res) => {
     try {
         const foodNew = await FoodModel.findById(req.params.id);
         await foodNew.updateOne({ $set: req.body });
@@ -59,7 +59,7 @@ app.put('/api/food/:id', async (req, res) => {
     }
 });
 
-app.delete('/api/food/:id', async (req, res) => {
+app.delete('/v1/api/food/:id', async (req, res) => {
     try {
         const postObj = await FoodModel.findById(req.params.id);
         await postObj.deleteOne();
